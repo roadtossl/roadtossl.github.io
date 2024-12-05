@@ -6,7 +6,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -18,25 +18,50 @@
         input, select, button {
             padding: 10px;
         }
+        .player-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .player-stats div {
+            width: 45%;
+        }
+        .team-record {
+            display: flex;
+            justify-content: space-between;
+        }
     </style>
 </head>
 <body>
     <h1>Atualizar Estatísticas SSL</h1>
     <form id="statsForm">
-        <select id="player" required>
-            <option value="rodrigo">rodrigo</option>
-            <option value="paozinho">paozinho</option>
-        </select>
-        
-        <input type="number" id="points" placeholder="Pontos" required>
-        <input type="number" id="goals" placeholder="Gols" required>
-        <input type="number" id="assists" placeholder="Assistências" required>
-        <input type="number" id="saves" placeholder="Saves" required>
-        <input type="number" id="shots" placeholder="Remates" required>
-        
-        <h3>Vitórias e Derrotas (Equipe)</h3>
-        <input type="number" id="victories" placeholder="Vitórias" required>
-        <input type="number" id="defeats" placeholder="Derrotas" required>
+        <div class="player-stats">
+            <div>
+                <h3>rodrigo</h3>
+                <input type="number" id="rodrigo-points" placeholder="Pontos" required>
+                <input type="number" id="rodrigo-goals" placeholder="Gols" required>
+                <input type="number" id="rodrigo-assists" placeholder="Assistências" required>
+                <input type="number" id="rodrigo-saves" placeholder="Saves" required>
+                <input type="number" id="rodrigo-shots" placeholder="Remates" required>
+            </div>
+
+            <div>
+                <h3>paozinho</h3>
+                <input type="number" id="paozinho-points" placeholder="Pontos" required>
+                <input type="number" id="paozinho-goals" placeholder="Gols" required>
+                <input type="number" id="paozinho-assists" placeholder="Assistências" required>
+                <input type="number" id="paozinho-saves" placeholder="Saves" required>
+                <input type="number" id="paozinho-shots" placeholder="Remates" required>
+            </div>
+        </div>
+
+        <div class="team-record">
+            <div>
+                <h3>Vitórias e Derrotas (Equipe)</h3>
+                <input type="number" id="victories" placeholder="Vitórias" required>
+                <input type="number" id="defeats" placeholder="Derrotas" required>
+            </div>
+        </div>
         
         <button type="submit">Atualizar Estatísticas</button>
     </form>
@@ -45,35 +70,45 @@
         document.getElementById('statsForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const player = document.getElementById('player').value;
-            
             // Buscar o JSON atual
             const response = await fetch('stats.json');
             const data = await response.text();
             const stats = JSON.parse(data);
 
-            // Definir os novos valores a adicionar
-            const newStats = {
-                'pontos': parseInt(document.getElementById('points').value),
-                'gols': parseInt(document.getElementById('goals').value),
-                'assistencias': parseInt(document.getElementById('assists').value),
-                'saves': parseInt(document.getElementById('saves').value),
-                'remates': parseInt(document.getElementById('shots').value)
+            // Definir os novos valores a adicionar para rodrigo
+            const rodrigoStats = {
+                'pontos': parseInt(document.getElementById('rodrigo-points').value),
+                'gols': parseInt(document.getElementById('rodrigo-goals').value),
+                'assistencias': parseInt(document.getElementById('rodrigo-assists').value),
+                'saves': parseInt(document.getElementById('rodrigo-saves').value),
+                'remates': parseInt(document.getElementById('rodrigo-shots').value)
             };
 
-            // Somar os novos valores aos existentes para as estatísticas do jogador
-            Object.keys(newStats).forEach(key => {
-                stats[player][key] += newStats[key];
+            // Somar os novos valores aos existentes para as estatísticas do rodrigo
+            Object.keys(rodrigoStats).forEach(key => {
+                stats.rodrigo[key] += rodrigoStats[key];
             });
 
-            // Adicionar vitórias e derrotas para ambos os jogadores (já que são da mesma equipe)
+            // Definir os novos valores a adicionar para paozinho
+            const paozinhoStats = {
+                'pontos': parseInt(document.getElementById('paozinho-points').value),
+                'gols': parseInt(document.getElementById('paozinho-goals').value),
+                'assistencias': parseInt(document.getElementById('paozinho-assists').value),
+                'saves': parseInt(document.getElementById('paozinho-saves').value),
+                'remates': parseInt(document.getElementById('paozinho-shots').value)
+            };
+
+            // Somar os novos valores aos existentes para as estatísticas do paozinho
+            Object.keys(paozinhoStats).forEach(key => {
+                stats.paozinho[key] += paozinhoStats[key];
+            });
+
+            // Adicionar vitórias e derrotas para a equipe
             const victories = parseInt(document.getElementById('victories').value);
             const defeats = parseInt(document.getElementById('defeats').value);
 
-            stats.rodrigo.vitorias += victories;
-            stats.paozinho.vitorias += victories;
-            stats.rodrigo.derrotas += defeats;
-            stats.paozinho.derrotas += defeats;
+            stats.team.vitorias += victories;
+            stats.team.derrotas += defeats;
 
             // Converter de volta para JSON
             const updatedJson = JSON.stringify(stats, null, 4);

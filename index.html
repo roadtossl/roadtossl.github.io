@@ -112,8 +112,8 @@
         });
 
         // Carregar vitórias e derrotas da equipe
-        document.getElementById('team-victories').textContent = data.rodrigo.vitorias;
-        document.getElementById('team-defeats').textContent = data.rodrigo.derrotas;
+        document.getElementById('team-victories').textContent = data.team.vitorias;
+        document.getElementById('team-defeats').textContent = data.team.derrotas;
       } catch (error) {
         console.error('Erro ao carregar estatísticas:', error);
       }
@@ -124,6 +124,7 @@
 
     // Atualizar estatísticas a cada 5 segundos
     setInterval(loadStats, 5000);
-  </script>
+</script>
+
 </body>
 </html>
