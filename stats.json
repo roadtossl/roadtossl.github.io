@@ -4,13 +4,17 @@
       "gols": 7,
       "assistencias": 2,
       "saves": 6,
-      "remates": 15
+      "remates": 15,
+      "vitorias": 2,
+      "derrotas": 1
   },
   "paozinho": {
       "pontos": 1822,
       "gols": 5,
       "assistencias": 3,
       "saves": 7,
-      "remates": 18
+      "remates": 18,
+      "vitorias": 2,
+      "derrotas": 1
   }
 }
