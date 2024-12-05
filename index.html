@@ -120,28 +120,42 @@
   </main>
 
   <script>
+    // Função para carregar estatísticas do localStorage
+    function loadStats() {
+      const players = ['player1', 'player2'];
+      const statsTypes = ['pontos', 'gols', 'assistencias', 'saves', 'remates'];
+
+      players.forEach(player => {
+        statsTypes.forEach(stat => {
+          const storedValue = localStorage.getItem(`${stat}-${player}`);
+          document.getElementById(`${stat}-${player}`).textContent = storedValue || '0';
+        });
+      });
+    }
+
+    // Carregar estatísticas quando a página carrega
+    document.addEventListener('DOMContentLoaded', loadStats);
+
     document.getElementById('updateButton').addEventListener('click', function() {
       const player = document.getElementById('player').value;
       const values = document.getElementById('values').value.split(' ').map(Number);
 
       if (values.length === 5 && values.every(val => !isNaN(val))) {
-        // Soma os novos valores aos existentes
-        const [pontos, gols, assistencias, saves, remates] = values;
+        // Estatísticas a serem atualizadas
+        const statsTypes = ['pontos', 'gols', 'assistencias', 'saves', 'remates'];
         
-        document.getElementById(`pontos-${player}`).textContent = 
-          Number(document.getElementById(`pontos-${player}`).textContent) + pontos;
-        
-        document.getElementById(`gols-${player}`).textContent = 
-          Number(document.getElementById(`gols-${player}`).textContent) + gols;
-        
-        document.getElementById(`assistencias-${player}`).textContent = 
-          Number(document.getElementById(`assistencias-${player}`).textContent) + assistencias;
-        
-        document.getElementById(`saves-${player}`).textContent = 
-          Number(document.getElementById(`saves-${player}`).textContent) + saves;
-        
-        document.getElementById(`remates-${player}`).textContent = 
-          Number(document.getElementById(`remates-${player}`).textContent) + remates;
+        // Percorre cada tipo de estatística
+        statsTypes.forEach((stat, index) => {
+          const elementId = `${stat}-${player}`;
+          const currentValue = Number(document.getElementById(elementId).textContent);
+          const newValue = currentValue + values[index];
+          
+          // Atualiza o elemento na página
+          document.getElementById(elementId).textContent = newValue;
+          
+          // Salva no localStorage
+          localStorage.setItem(elementId, newValue);
+        });
       } else {
         alert('Por favor, insira 5 valores válidos separados por espaço.');
       }

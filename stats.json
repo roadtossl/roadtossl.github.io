@@ -1,0 +1,17 @@
+{
+    "player1": {
+      "pontos": 100,
+      "gols": 5,
+      "assistencias": 2,
+      "saves": 4,
+      "remates": 10
+    },
+    "player2": {
+      "pontos": 150,
+      "gols": 8,
+      "assistencias": 3,
+      "saves": 6,
+      "remates": 12
+    }
+  }
+  
