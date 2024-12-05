@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Estatísticas da Época</title>
+  <title>Road to SSL - Last Dance</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,7 +14,7 @@
     }
 
     header {
-      background-color: #6200ea;
+      background-color: #BB509F;
       color: #fff;
       padding: 1rem 2rem;
       text-align: center;
@@ -66,19 +66,19 @@
     }
 
     .update-form button {
-      background-color: #6200ea;
+      background-color: #BB509F;
       color: #fff;
       cursor: pointer;
     }
 
     .update-form button:hover {
-      background-color: #4500b5;
+      background-color: #BB509F;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Estatísticas da Época</h1>
+    <h1>Road to SSL - Last Dance</h1>
   </header>
   <main>
     <div class="stats-container">
@@ -108,80 +108,33 @@
       <h3>Atualizar Estatísticas</h3>
       <label for="player">Jogador:</label>
       <select id="player" name="player">
-        <option value="player1">Jogador 1</option>
-        <option value="player2">Jogador 2</option>
+        <option value="player1">rodrigo</option>
+        <option value="player2">paozinho</option>
       </select>
 
-      <label for="stat">Estatística:</label>
-      <select id="stat" name="stat">
-        <option value="pontos">Pontos</option>
-        <option value="gols">Gols</option>
-        <option value="assistencias">Assistências</option>
-        <option value="saves">Saves</option>
-        <option value="remates">Remates</option>
-      </select>
-
-      <label for="value">Valor:</label>
-      <input type="number" id="value" name="value" min="0">
+      <label for="values">Estatísticas (Pontos Gols Assistências Saves Remates):</label>
+      <input type="text" id="values" name="values" placeholder="Exemplo: 100 5 2 4 10">
 
       <button type="button" id="updateButton">Atualizar</button>
     </form>
   </main>
 
   <script>
-    // Carregar estatísticas do LocalStorage ao carregar a página
-    function loadStats() {
-      const savedStats = JSON.parse(localStorage.getItem('stats')) || {};
-      for (const player in savedStats) {
-        for (const stat in savedStats[player]) {
-          const statSpan = document.getElementById(`${stat}-${player}`);
-          if (statSpan) {
-            statSpan.textContent = savedStats[player][stat];
-          }
-        }
-      }
-    }
-  
-    // Salvar estatísticas no LocalStorage
-    function saveStats() {
-      const stats = {
-        player1: {
-          pontos: document.getElementById('pontos-player1').textContent,
-          gols: document.getElementById('gols-player1').textContent,
-          assistencias: document.getElementById('assistencias-player1').textContent,
-          saves: document.getElementById('saves-player1').textContent,
-          remates: document.getElementById('remates-player1').textContent,
-        },
-        player2: {
-          pontos: document.getElementById('pontos-player2').textContent,
-          gols: document.getElementById('gols-player2').textContent,
-          assistencias: document.getElementById('assistencias-player2').textContent,
-          saves: document.getElementById('saves-player2').textContent,
-          remates: document.getElementById('remates-player2').textContent,
-        },
-      };
-      localStorage.setItem('stats', JSON.stringify(stats));
-    }
-  
-    // Atualizar estatísticas e salvar
     document.getElementById('updateButton').addEventListener('click', function() {
       const player = document.getElementById('player').value;
-      const stat = document.getElementById('stat').value;
-      const value = parseInt(document.getElementById('value').value, 10);
-  
-      if (!isNaN(value)) {
-        const statSpan = document.getElementById(`${stat}-${player}`);
-        const currentValue = parseInt(statSpan.textContent, 10);
-        statSpan.textContent = currentValue + value;
-        saveStats(); // Salvar mudanças
+      const values = document.getElementById('values').value.split(' ').map(Number);
+
+      if (values.length === 5 && values.every(val => !isNaN(val))) {
+        const [pontos, gols, assistencias, saves, remates] = values;
+        document.getElementById(`pontos-${player}`).textContent = pontos;
+        document.getElementById(`gols-${player}`).textContent = gols;
+        document.getElementById(`assistencias-${player}`).textContent = assistencias;
+        document.getElementById(`saves-${player}`).textContent = saves;
+        document.getElementById(`remates-${player}`).textContent = remates;
       } else {
-        alert('Por favor, insira um valor válido.');
+        alert('Por favor, insira 5 valores válidos separados por espaço.');
       }
     });
-  
-    // Inicializar a página 
-    loadStats();
   </script>
-  
 </body>
 </html>
