@@ -1,17 +1,16 @@
 {
-    "player1": {
-      "pontos": 100,
-      "gols": 5,
-      "assistencias": 2,
-      "saves": 4,
-      "remates": 10
-    },
-    "player2": {
-      "pontos": 150,
-      "gols": 8,
-      "assistencias": 3,
-      "saves": 6,
-      "remates": 12
-    }
+  "rodrigo": {
+      "pontos": 0,
+      "gols": 0,
+      "assistencias": 0,
+      "saves": 0,
+      "remates": 0
+  },
+  "paozinho": {
+      "pontos": 0,
+      "gols": 0,
+      "assistencias": 0,
+      "saves": 0,
+      "remates": 0
   }
-  
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Administração de Estatísticas SSL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        input, select, button {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Atualizar Estatísticas SSL</h1>
+    <form id="statsForm">
+        <select id="player" required>
+            <option value="rodrigo">rodrigo</option>
+            <option value="paozinho">paozinho</option>
+        </select>
+        
+        <input type="number" id="points" placeholder="Pontos" required>
+        <input type="number" id="goals" placeholder="Gols" required>
+        <input type="number" id="assists" placeholder="Assistências" required>
+        <input type="number" id="saves" placeholder="Saves" required>
+        <input type="number" id="shots" placeholder="Remates" required>
+        
+        <button type="submit">Atualizar Estatísticas</button>
+    </form>
+
+    <script>
+        document.getElementById('statsForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const player = document.getElementById('player').value;
+            
+            // Buscar o JSON atual
+            const response = await fetch('stats.json');
+            const data = await response.text();
+            const stats = JSON.parse(data);
+
+            // Atualizar as estatísticas do jogador
+            stats[player] = {
+                'pontos': document.getElementById('points').value,
+                'gols': document.getElementById('goals').value,
+                'assistencias': document.getElementById('assists').value,
+                'saves': document.getElementById('saves').value,
+                'remates': document.getElementById('shots').value
+            };
+
+            // Converter de volta para JSON
+            const updatedJson = JSON.stringify(stats, null, 4);
+
+            // Salvar o JSON (isso vai depender da sua configuração de hospedagem)
+            // Em GitHub Pages, você precisará fazer commit e push manualmente
+            alert('Por favor, copie o seguinte JSON e substitua o conteúdo do stats.json no seu repositório GitHub:\n\n' + updatedJson);
+
+            this.reset();
+        });
+    </script>
+</body>
+</html>
