@@ -28,6 +28,7 @@
       display: flex;
       justify-content: space-around;
       margin-bottom: 2rem;
+      align-items: center;
     }
 
     .player-card {
@@ -51,6 +52,13 @@
 
     .stats li {
       margin: 0.5rem 0;
+    }
+
+    .team-record {
+      text-align: center;
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-top: 1rem;
     }
   </style>
 </head>
@@ -81,6 +89,9 @@
         </ul>
       </div>
     </div>
+    <div class="team-record">
+      <span id="team-victories">0</span>W - <span id="team-defeats">0</span>L
+    </div>
   </main>
 
   <script>
@@ -99,6 +110,10 @@
             document.getElementById(`${stat}-${playerName === 'rodrigo' ? 'player1' : 'player2'}`).textContent = value;
           });
         });
+
+        // Carregar vitórias e derrotas da equipe
+        document.getElementById('team-victories').textContent = data.rodrigo.vitorias;
+        document.getElementById('team-defeats').textContent = data.rodrigo.derrotas;
       } catch (error) {
         console.error('Erro ao carregar estatísticas:', error);
       }

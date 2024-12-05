@@ -34,6 +34,10 @@
         <input type="number" id="saves" placeholder="Saves" required>
         <input type="number" id="shots" placeholder="Remates" required>
         
+        <h3>Vitórias e Derrotas (Equipe)</h3>
+        <input type="number" id="victories" placeholder="Vitórias" required>
+        <input type="number" id="defeats" placeholder="Derrotas" required>
+        
         <button type="submit">Atualizar Estatísticas</button>
     </form>
 
@@ -57,10 +61,19 @@
                 'remates': parseInt(document.getElementById('shots').value)
             };
 
-            // Somar os novos valores aos existentes
+            // Somar os novos valores aos existentes para as estatísticas do jogador
             Object.keys(newStats).forEach(key => {
                 stats[player][key] += newStats[key];
             });
+
+            // Adicionar vitórias e derrotas para ambos os jogadores (já que são da mesma equipe)
+            const victories = parseInt(document.getElementById('victories').value);
+            const defeats = parseInt(document.getElementById('defeats').value);
+
+            stats.rodrigo.vitorias += victories;
+            stats.paozinho.vitorias += victories;
+            stats.rodrigo.derrotas += defeats;
+            stats.paozinho.derrotas += defeats;
 
             // Converter de volta para JSON
             const updatedJson = JSON.stringify(stats, null, 4);
