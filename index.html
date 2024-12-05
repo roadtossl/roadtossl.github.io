@@ -125,12 +125,23 @@
       const values = document.getElementById('values').value.split(' ').map(Number);
 
       if (values.length === 5 && values.every(val => !isNaN(val))) {
+        // Soma os novos valores aos existentes
         const [pontos, gols, assistencias, saves, remates] = values;
-        document.getElementById(`pontos-${player}`).textContent = pontos;
-        document.getElementById(`gols-${player}`).textContent = gols;
-        document.getElementById(`assistencias-${player}`).textContent = assistencias;
-        document.getElementById(`saves-${player}`).textContent = saves;
-        document.getElementById(`remates-${player}`).textContent = remates;
+        
+        document.getElementById(`pontos-${player}`).textContent = 
+          Number(document.getElementById(`pontos-${player}`).textContent) + pontos;
+        
+        document.getElementById(`gols-${player}`).textContent = 
+          Number(document.getElementById(`gols-${player}`).textContent) + gols;
+        
+        document.getElementById(`assistencias-${player}`).textContent = 
+          Number(document.getElementById(`assistencias-${player}`).textContent) + assistencias;
+        
+        document.getElementById(`saves-${player}`).textContent = 
+          Number(document.getElementById(`saves-${player}`).textContent) + saves;
+        
+        document.getElementById(`remates-${player}`).textContent = 
+          Number(document.getElementById(`remates-${player}`).textContent) + remates;
       } else {
         alert('Por favor, insira 5 valores válidos separados por espaço.');
       }
