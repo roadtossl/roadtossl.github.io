@@ -48,21 +48,27 @@
             const data = await response.text();
             const stats = JSON.parse(data);
 
-            // Atualizar as estatísticas do jogador
-            stats[player] = {
-                'pontos': document.getElementById('points').value,
-                'gols': document.getElementById('goals').value,
-                'assistencias': document.getElementById('assists').value,
-                'saves': document.getElementById('saves').value,
-                'remates': document.getElementById('shots').value
+            // Definir os novos valores a adicionar
+            const newStats = {
+                'pontos': parseInt(document.getElementById('points').value),
+                'gols': parseInt(document.getElementById('goals').value),
+                'assistencias': parseInt(document.getElementById('assists').value),
+                'saves': parseInt(document.getElementById('saves').value),
+                'remates': parseInt(document.getElementById('shots').value)
             };
+
+            // Somar os novos valores aos existentes
+            Object.keys(newStats).forEach(key => {
+                stats[player][key] += newStats[key];
+            });
 
             // Converter de volta para JSON
             const updatedJson = JSON.stringify(stats, null, 4);
 
-            // Salvar o JSON (isso vai depender da sua configuração de hospedagem)
-            // Em GitHub Pages, você precisará fazer commit e push manualmente
-            alert('Por favor, copie o seguinte JSON e substitua o conteúdo do stats.json no seu repositório GitHub:\n\n' + updatedJson);
+            // Copiar para área de transferência
+            navigator.clipboard.writeText(updatedJson).then(() => {
+                alert('JSON copiado para área de transferência! Cole no stats.json do seu repositório GitHub.');
+            });
 
             this.reset();
         });
