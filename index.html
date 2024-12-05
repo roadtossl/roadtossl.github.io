@@ -8,9 +8,11 @@
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
+      padding: 2rem;
       background-color: #f4f4f9;
       color: #333;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
     header {
@@ -18,10 +20,7 @@
       color: #fff;
       padding: 1rem 2rem;
       text-align: center;
-    }
-
-    main {
-      padding: 2rem;
+      margin-bottom: 1rem;
     }
 
     .stats-container {
@@ -69,10 +68,16 @@
       background-color: #BB509F;
       color: #fff;
       cursor: pointer;
+      margin-bottom: 1rem;
     }
 
-    .update-form button:hover {
-      background-color: #BB509F;
+    .copy-link-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 0.5rem;
+      border-radius: 4px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -80,48 +85,51 @@
   <header>
     <h1>Road to SSL - Last Dance</h1>
   </header>
-  <main>
-    <div class="stats-container">
-      <div class="player-card" id="player1">
-        <h2>rodrigo</h2>
-        <ul class="stats" id="stats-player1">
-          <li>Points: <span id="pontos-player1">0</span></li>
-          <li>Goals: <span id="gols-player1">0</span></li>
-          <li>Assists: <span id="assistencias-player1">0</span></li>
-          <li>Saves: <span id="saves-player1">0</span></li>
-          <li>Shots: <span id="remates-player1">0</span></li>
-        </ul>
-      </div>
-      <div class="player-card" id="player2">
-        <h2>paozinho</h2>
-        <ul class="stats" id="stats-player2">
-          <li>Points: <span id="pontos-player2">0</span></li>
-          <li>Goals: <span id="gols-player2">0</span></li>
-          <li>Assists: <span id="assistencias-player2">0</span></li>
-          <li>Saves: <span id="saves-player2">0</span></li>
-          <li>Shots: <span id="remates-player2">0</span></li>
-        </ul>
-      </div>
+
+  <div class="stats-container">
+    <div class="player-card" id="player1">
+      <h2>rodrigo</h2>
+      <ul class="stats" id="stats-player1">
+        <li>Points: <span id="pontos-player1">0</span></li>
+        <li>Goals: <span id="gols-player1">0</span></li>
+        <li>Assists: <span id="assistencias-player1">0</span></li>
+        <li>Saves: <span id="saves-player1">0</span></li>
+        <li>Shots: <span id="remates-player1">0</span></li>
+      </ul>
     </div>
+    <div class="player-card" id="player2">
+      <h2>paozinho</h2>
+      <ul class="stats" id="stats-player2">
+        <li>Points: <span id="pontos-player2">0</span></li>
+        <li>Goals: <span id="gols-player2">0</span></li>
+        <li>Assists: <span id="assistencias-player2">0</span></li>
+        <li>Saves: <span id="saves-player2">0</span></li>
+        <li>Shots: <span id="remates-player2">0</span></li>
+      </ul>
+    </div>
+  </div>
 
-    <form class="update-form" id="updateForm">
-      <h3>Atualizar Estatísticas</h3>
-      <label for="player">Jogador:</label>
-      <select id="player" name="player">
-        <option value="player1">rodrigo</option>
-        <option value="player2">paozinho</option>
-      </select>
+  <div style="text-align: center;">
+    <button id="copyLinkButton" class="copy-link-button">Copiar Link para Estatísticas</button>
+  </div>
 
-      <label for="values">Estatísticas (Pontos Gols Assistências Saves Remates):</label>
-      <input type="text" id="values" name="values" placeholder="Exemplo: 100 5 2 4 10">
+  <form class="update-form" id="updateForm">
+    <h3>Atualizar Estatísticas</h3>
+    <label for="player">Jogador:</label>
+    <select id="player" name="player">
+      <option value="player1">rodrigo</option>
+      <option value="player2">paozinho</option>
+    </select>
 
-      <button type="button" id="updateButton">Atualizar</button>
-    </form>
-  </main>
+    <label for="values">Estatísticas (Pontos Gols Assistências Saves Remates):</label>
+    <input type="text" id="values" name="values" placeholder="Exemplo: 100 5 2 4 10">
+
+    <button type="button" id="updateButton">Atualizar</button>
+  </form>
 
   <script>
-    // Função para carregar estatísticas do localStorage
-    function loadStats() {
+    // Carregar estatísticas do localStorage quando a página carrega
+    document.addEventListener('DOMContentLoaded', function() {
       const players = ['player1', 'player2'];
       const statsTypes = ['pontos', 'gols', 'assistencias', 'saves', 'remates'];
 
@@ -131,34 +139,37 @@
           document.getElementById(`${stat}-${player}`).textContent = storedValue || '0';
         });
       });
-    }
+    });
 
-    // Carregar estatísticas quando a página carrega
-    document.addEventListener('DOMContentLoaded', loadStats);
-
+    // Atualizar estatísticas
     document.getElementById('updateButton').addEventListener('click', function() {
       const player = document.getElementById('player').value;
       const values = document.getElementById('values').value.split(' ').map(Number);
 
       if (values.length === 5 && values.every(val => !isNaN(val))) {
-        // Estatísticas a serem atualizadas
         const statsTypes = ['pontos', 'gols', 'assistencias', 'saves', 'remates'];
         
-        // Percorre cada tipo de estatística
         statsTypes.forEach((stat, index) => {
           const elementId = `${stat}-${player}`;
           const currentValue = Number(document.getElementById(elementId).textContent);
           const newValue = currentValue + values[index];
           
-          // Atualiza o elemento na página
           document.getElementById(elementId).textContent = newValue;
-          
-          // Salva no localStorage
           localStorage.setItem(elementId, newValue);
         });
       } else {
         alert('Por favor, insira 5 valores válidos separados por espaço.');
       }
+    });
+
+    // Copiar link da página
+    document.getElementById('copyLinkButton').addEventListener('click', function() {
+      navigator.clipboard.writeText(window.location.href).then(function() {
+        alert('Link copiado com sucesso!');
+      }, function(err) {
+        console.error('Erro ao copiar link: ', err);
+        alert('Não foi possível copiar o link.');
+      });
     });
   </script>
 </body>
