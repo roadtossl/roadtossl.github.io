@@ -1,20 +1,20 @@
 {
-  "team": {
-      "vitorias": 7,
-      "derrotas": 5
-  },
-  "rodrigo": {
-      "pontos": 6632,
-      "gols": 22,
-      "assistencias": 10,
-      "saves": 20,
-      "remates": 55
-  },
-  "paozinho": {
-      "pontos": 6433,
-      "gols": 25,
-      "assistencias": 12,
-      "saves": 21,
-      "remates": 61
-  }
+    "team": {
+        "vitorias": 11,
+        "derrotas": 8
+    },
+    "rodrigo": {
+        "pontos": 11419,
+        "gols": 41,
+        "assistencias": 18,
+        "saves": 33,
+        "remates": 90
+    },
+    "paozinho": {
+        "pontos": 10190,
+        "gols": 36,
+        "assistencias": 24,
+        "saves": 32,
+        "remates": 85
+    }
 }
