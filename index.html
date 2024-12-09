@@ -4,18 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Road to SSL - Last Dance</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary-color: #BB509F;
-      --secondary-color: #8E3B76;
-      --tertiary-color: #6C5CE7;
-      --background-color: #f8f9fa;
-      --card-background: #ffffff;
-      --text-color: #333333;
-      --accent-color: #4A90E2;
-      --success-color: #2ECC71;
-      --warning-color: #F39C12;
+      --primary-color: #6C63FF;
+      --secondary-color: #4A4E69;
+      --tertiary-color: #9A8C98;
+      --background-color: #F7F7FB;
+      --card-background: #FFFFFF;
+      --text-color: #2D3142;
+      --accent-color: #FFC857;
+      --success-color: #28A745;
+      --warning-color: #E63946;
     }
 
     * {
@@ -25,7 +25,7 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Poppins', sans-serif;
       background-color: var(--background-color);
       color: var(--text-color);
       line-height: 1.6;
@@ -34,100 +34,89 @@
     .gradient-bg {
       background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
       color: white;
-      position: relative;
-    }
-
-    header {
-      padding: 1.5rem 2rem;
+      padding: 2rem 1rem;
       text-align: center;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
     header h1 {
+      font-size: 2.5rem;
       font-weight: 700;
-      letter-spacing: -1px;
-      flex-grow: 1;
     }
 
     .nav-icons {
       display: flex;
-      gap: 1rem;
+      justify-content: center;
+      margin-top: 1rem;
+      gap: 1.5rem;
     }
 
     .nav-icon {
       color: white;
-      text-decoration: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      transition: transform 0.2s;
+      font-size: 1.8rem;
+      transition: transform 0.3s;
     }
 
     .nav-icon:hover {
-      transform: scale(1.1);
+      transform: scale(1.2);
     }
 
     main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 1rem;
     }
 
     .stats-container {
       display: flex;
-      justify-content: space-between;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
     }
 
     .player-card {
-      flex: 1;
       background: var(--card-background);
-      border-radius: 12px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       padding: 1.5rem;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-      transition: transform 0.3s ease;
-      position: relative;
+      text-align: center;
+      width: 280px;
     }
 
     .player-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
     }
 
     .player-card h2 {
       color: var(--primary-color);
-      margin-bottom: 1rem;
       font-weight: 600;
-      text-transform: capitalize;
     }
 
     .performance-badge {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background-color: var(--tertiary-color);
+      top: 10px;
+      right: 10px;
+      background-color: var(--accent-color);
       color: white;
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
-      font-size: 0.7rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      font-weight: bold;
     }
 
     .stats {
       list-style: none;
+      margin-top: 1rem;
     }
 
     .stats li {
       display: flex;
       justify-content: space-between;
       padding: 0.5rem 0;
-      border-bottom: 1px solid #f1f3f5;
-      transition: background-color 0.2s;
-    }
-
-    .stats li:hover {
-      background-color: #f8f9fa;
+      font-size: 0.9rem;
+      border-bottom: 1px solid #E8EAF6;
     }
 
     .stats li:last-child {
@@ -135,150 +124,108 @@
     }
 
     .team-record {
-      text-align: center;
-      font-size: 1.5em;
-      font-weight: 600;
-      color: var(--secondary-color);
+      background: var(--primary-color);
+      color: white;
+      border-radius: 15px;
+      padding: 2rem;
       margin: 2rem 0;
-      background-color: #f1f3f5;
-      padding: 1rem;
-      border-radius: 8px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .team-record-details {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .win-streak {
-      font-size: 0.7em;
-      color: var(--success-color);
-      margin-top: 0.5rem;
-    }
-
-    .monthly-highlights-section {
-      margin-top: 2rem;
-    }
-
-    .monthly-highlights-section h2 {
       text-align: center;
-      color: var(--primary-color);
-      margin-bottom: 1.5rem;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .team-record span {
+      font-size: 2rem;
       font-weight: 700;
     }
 
-    .monthly-highlights {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-    }
-
-    .highlight-video {
-      text-align: center;
-      max-width: 350px;
-      background: var(--card-background);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-    }
-
-    .highlight-video:hover {
-      transform: scale(1.03);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-    }
-
-    .highlight-video h3 {
-      background-color: var(--primary-color);
-      color: white;
-      padding: 0.75rem;
-      margin: 0;
-      font-weight: 500;
-    }
-
-    .highlight-video video {
-      width: 100%;
-      border-bottom-left-radius: 12px;
-      border-bottom-right-radius: 12px;
-      cursor: pointer;
-    }
-
     .achievements-section {
-      margin-top: 2rem;
-      background-color: var(--card-background);
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      margin-top: 3rem;
+      background: var(--card-background);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }
 
     .achievements-section h2 {
-      color: var(--secondary-color);
-      margin-bottom: 1rem;
       text-align: center;
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
     }
 
     .achievements-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
     }
 
     .achievement {
-      background-color: #f1f3f5;
-      border-radius: 8px;
-      padding: 1rem;
+      background: var(--tertiary-color);
+      color: white;
       text-align: center;
-      transition: transform 0.3s ease;
+      padding: 1rem;
+      border-radius: 10px;
+      width: 200px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
     }
 
     .achievement:hover {
       transform: scale(1.05);
-      background-color: var(--tertiary-color);
-      color: white;
     }
 
-    .next-match {
-      margin-top: 2rem;
-      background-color: var(--card-background);
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    .monthly-highlights-section {
+      margin-top: 3rem;
       text-align: center;
     }
 
-    .next-match h2 {
-      color: var(--accent-color);
-      margin-bottom: 1rem;
+    .monthly-highlights-section h2 {
+      color: var(--secondary-color);
     }
 
-    .match-countdown {
-      font-size: 2rem;
-      font-weight: 600;
-      color: var(--secondary-color);
-      margin-top: 1rem;
+    .highlight-video {
+      margin: 2rem auto;
+      max-width: 400px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .highlight-video:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .highlight-video h3 {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 0.75rem;
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .highlight-video video {
+      width: 100%;
+      display: block;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
     }
 
     @media (max-width: 768px) {
-      .stats-container,
-      .monthly-highlights,
-      .achievements-grid {
+      .stats-container {
         flex-direction: column;
+        align-items: center;
       }
 
       .player-card,
-      .highlight-video,
-      .achievement {
-        width: 100%;
+      .highlight-video {
+        width: 90%;
       }
 
-      .team-record {
+      .achievements-grid {
         flex-direction: column;
-        gap: 1rem;
+        align-items: center;
       }
     }
   </style>
@@ -296,8 +243,8 @@
   <main>
     <div class="stats-container">
       <div class="player-card" id="player1">
-        <div class="performance-badge">MVP</div>
-        <h2>rodrigo</h2>
+    <!--    <div class="performance-badge">MVP</div> -->
+        <h2>Rodrigo</h2>
         <ul class="stats" id="stats-player1">
           <li><span>Points</span> <span id="pontos-player1">0</span></li>
           <li><span>Goals</span> <span id="gols-player1">0</span></li>
@@ -307,7 +254,7 @@
         </ul>
       </div>
       <div class="player-card" id="player2">
-        <h2>paozinho</h2>
+        <h2>Paozinho</h2>
         <ul class="stats" id="stats-player2">
           <li><span>Points</span> <span id="pontos-player2">0</span></li>
           <li><span>Goals</span> <span id="gols-player2">0</span></li>
@@ -319,13 +266,8 @@
     </div>
 
     <div class="team-record">
-      <div class="team-record-details">
-        <div>
-          <span id="team-victories">0</span>W - <span id="team-defeats">0</span>L
-        </div>
-        <div class="win-streak">Current rank: Champ 3</div>
-        <div class="win-streak">Started: Champ 2, Peak: Champ 3</div>
-      </div>
+      <span id="team-victories">0</span>W - <span id="team-defeats">0</span>L
+      <div class="win-streak">Current rank: Champ 3</div>
     </div>
 
     <div class="achievements-section">
@@ -337,8 +279,6 @@
         </div>
         <div class="achievement">
           <h3>Most Assists</h3>
-
-
           <p id="most-assists">Not determined</p>
         </div>
         <div class="achievement">
@@ -347,100 +287,16 @@
         </div>
       </div>
     </div>
-    
+
     <div class="monthly-highlights-section">
       <h2>Plays of the Month</h2>
-      <div class="monthly-highlights">
-        <div class="highlight-video">
-          <h3>December - Coming Soon</h3>
-          <video id="december-highlight" src="" controls>
-            Your browser does not support the video tag.
-          </video>
-        </div>
+      <div class="highlight-video">
+        <h3>December - Coming Soon</h3>
+        <video id="december-highlight" src="" controls>
+          Your browser does not support the video tag.
+        </video>
       </div>
     </div>
-
-    
-    
   </main>
-
-  <script>
-function assignMVP(data) {
-  const players = ['rodrigo', 'paozinho'];
-
-  // Remove any existing MVP badges first
-  players.forEach((player, index) => {
-    const playerCard = document.getElementById(`player${index + 1}`);
-    const existingBadge = playerCard.querySelector('.performance-badge');
-    if (existingBadge) {
-      existingBadge.remove();
-    }
-  });
-
-  // Determine the MVP based on points
-  const mvp = players.reduce((a, b) =>
-    data[a].pontos > data[b].pontos ? a : b
-  );
-
-  // Add the MVP badge to the correct player
-  const mvpBadge = document.createElement('div');
-  mvpBadge.className = 'performance-badge';
-  mvpBadge.textContent = 'MVP';
-
-  const playerCard = document.getElementById(`player${players.indexOf(mvp) + 1}`);
-  playerCard.appendChild(mvpBadge);
-}
-
-// Após carregar as estatísticas, atribua o MVP
-loadStats().then(() => {
-  assignMVP(data);
-});
-
-
-    async function loadStats() {
-      try {
-        const response = await fetch('stats.json');
-        const data = await response.json();
-
-        const players = ['rodrigo', 'paozinho'];
-        const statsTypes = ['pontos', 'gols', 'assistencias', 'saves', 'remates'];
-
-        players.forEach((playerName, index) => {
-          const playerId = `player${index + 1}`;
-          statsTypes.forEach(stat => {
-            const elementId = `${stat}-${playerId}`;
-            const value = data[playerName][stat];
-            document.getElementById(elementId).textContent = value;
-          });
-        });
-
-        document.getElementById('team-victories').textContent = data.team.vitorias;
-        document.getElementById('team-defeats').textContent = data.team.derrotas;
-
-
-        const topScorer = players.reduce((a, b) =>
-          data[a].gols > data[b].gols ? a : b
-        );
-        const mostAssists = players.reduce((a, b) =>
-          data[a].assistencias > data[b].assistencias ? a : b
-        );
-        const bestGoalkeeper = players.reduce((a, b) =>
-          data[a].saves > data[b].saves ? a : b
-        );
-
-        document.getElementById('top-scorer').textContent = `${topScorer} (${data[topScorer].gols} goals)`;
-        document.getElementById('most-assists').textContent = `${mostAssists} (${data[mostAssists].assistencias} assists)`;
-        document.getElementById('best-goalkeeper').textContent = `${bestGoalkeeper} (${data[bestGoalkeeper].saves} saves)`;
-
-        if (data.highlights && data.highlights.december) {
-          document.getElementById('december-highlight').src = data.highlights.december;
-        }
-      } catch (error) {
-        console.error('Erro ao carregar estatísticas:', error);
-      }
-    }
-
-    loadStats();
-  </script>
 </body>
 </html>
