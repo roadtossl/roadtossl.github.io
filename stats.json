@@ -16,5 +16,9 @@
         "assistencias": 24,
         "saves": 32,
         "remates": 85
+    },
+    "highlights": {
+      "december": "path/to/december_highlight.mp4",
+      "january": "path/to/january_highlight.mp4"
     }
 }
